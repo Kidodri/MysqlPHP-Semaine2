@@ -1,0 +1,15 @@
+body{
+    background-color: #e0dcd1;font-family: Arial; margin: 50px 35%; text-align: center;
+}
+div {
+    background: #262624; padding: 35px; color: #ffffff; border-radius: 15px; margin-top: 15px;
+}
+h3{
+    background: #3b4d2e; border-radius: 15px; padding: 10px;
+}
+.button{
+    background: #3b4d2e; color: #ffffff; border-radius: 15px; padding: 10px;
+}
+.nm_produit{
+    font-size: 35px; font-style: bold;
+}
