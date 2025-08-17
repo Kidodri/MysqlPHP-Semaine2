@@ -15,6 +15,13 @@
     <link rel="stylesheet" href="../../complements/stylesheet.css">
 </head>
 <body>
+
+    <div  class="menu">
+        <a href="../livres/liste_livres.php" class="boutton">Liste livres</a>
+        <a href="../membres/liste_membres.php" class="boutton">Liste membres</a>
+        <a href="../auteurs/liste_auteurs.php" class="boutton">Liste auteurs</a>
+    </div>
+
     <h1>Liste emprunts</h1>
 
     <table>
@@ -36,7 +43,7 @@
                 <td><?php echo htmlspecialchars($emprunt['prolongation']) ?></td>
                 <td><?php echo htmlspecialchars($emprunt['notes']) ?></td>
                 <td><a href='delete.php?id=<?php echo $emprunt['id']?>'>❌</a></td>
-                <td><a href="update.php?id=<?php echo $emprunt['id']?>">♻️​</a></td>
+                <td><a href="update.php?id=<?php echo $emprunt['id']?>">🖍️</a></td>
 
             </tr>
             <?php endforeach?>
@@ -44,7 +51,7 @@
         </tbody>
     </table>
     
-    <a href="../index.php" class="boutton">Allez à la liste des livres</a>
+    <a href="../index.php" class="boutton">Retourner au menu bibliotheque</a>
     <a href="create.php" class="boutton">Rentrez un nouveau emprunt</a>
 
 

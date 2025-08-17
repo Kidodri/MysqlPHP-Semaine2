@@ -30,7 +30,7 @@ class Auteur
 
     //READ - Recuperer tous les auteurs
     public function getAll(){
-        $sql = "SELECT * FROM `auteurs` ORDER BY date_naissance DESC;";
+        $sql = "SELECT * FROM `auteurs` ORDER BY id ASC;";
 
         $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll();
@@ -45,7 +45,7 @@ class Auteur
 
     //UPDATE - Modifier un auteur
     public function update($id_auteur,$nom_prenom, $nationalite, $date_naissance,$biographie,$id){
-        $sql = "UPDATE `auteurs` SET `id`=?,`nom_prenom`=?,`nationalite`=?,`date_naissance`=?,`biographie`=?,`date_creation`=? WHERE id=?";
+        $sql = "UPDATE `auteurs` SET `id`=?,`nom_prenom`=?,`nationalite`=?,`date_naissance`=?,`biographie`=?WHERE id=?";
 
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id_auteur,$nom_prenom, $nationalite, $date_naissance,$biographie,$id]);

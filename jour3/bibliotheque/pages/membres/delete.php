@@ -1,8 +1,8 @@
 <?php
-require_once('../../classes/Livre.php');
+require_once('../../classes/Emprunt.php');
 require_once('../../config/database.php');
 
-$livreModel = new Livre($pdo);
+$empruntModel = new Emprunt($pdo);
 $errors = [];
 
 // Traitement delete
@@ -11,8 +11,8 @@ if($_GET){
 }
 
 // Gestion des erreur
-if($livreModel->delete($id)){
-    header('Location: ../index.php?message=deleted');
+if($empruntModel->delete($id)){
+    header('Location: liste_emprunts.php?message=deleted');
 }
 
 

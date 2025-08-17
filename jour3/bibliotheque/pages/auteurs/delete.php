@@ -1,8 +1,8 @@
 <?php
-require_once('../../classes/Livre.php');
+require_once('../../classes/Auteur.php');
 require_once('../../config/database.php');
 
-$livreModel = new Livre($pdo);
+$auteurModel = new Auteur($pdo);
 $errors = [];
 
 // Traitement delete
@@ -11,8 +11,8 @@ if($_GET){
 }
 
 // Gestion des erreur
-if($livreModel->delete($id)){
-    header('Location: ../index.php?message=deleted');
+if($auteurModel->delete($id)){
+    header('Location: liste_auteurs.php?message=deleted');
 }
 
 

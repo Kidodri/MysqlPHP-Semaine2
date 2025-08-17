@@ -1,30 +1,30 @@
 <?php 
-require_once('../../classes/Livre.php');
+require_once('../../classes/Membre.php');
 require_once('../../config/database.php');
 
-$livreModel = new Livre($pdo);
+$membreModel = new Membre($pdo);
 $errors = [];
 
 // traitement formulaire
 if($_POST){
-    $titre = $_POST['titre'] ?? '';
-    $isbn = $_POST['isbn'] ?? '';
-    $date_publication = $_POST['date_publication'] ?? '';
-    $nb_pages = $_POST['nb_pages'] ?? '';
-    $resume = $_POST['synthese'] ?? '';
-    $disponible = $_POST['disponible'] ?? '';
+    $nom_prenom = $_POST['nom_prenom'] ?? '';
+    $mail = $_POST['mail'] ?? '';
+    $telephone = $_POST['telephone'] ?? '';
+    $adresse = $_POST['adresse'] ?? '';
+    $date_naissance = $_POST['date_naissance'] ?? '';
+    $actif = $_POST['actif'] ?? '';
 
     // Validation des donnes
-    if($disponible == "on"){
-        $disponible = 1;
+    if($prolongation == "on"){
+        $prolongation = 1;
     }
     else {
-        $disponible = 0;
+        $prolongation = 0;
     }
 
     // Gestion des erreurs
-    $livreModel->create($titre, $isbn, $date_publication,$nb_pages,$resume,$disponible);
-    header('Location: ../index.php?message=created');
+    $membreModel->create($nom_prenom,$mail,$telephone,$adresse,$date_naissance,$actif);
+    header('Location: liste_membres.php?message=created');
 }
 ?>
 
@@ -37,35 +37,36 @@ if($_POST){
     <link rel="stylesheet" href="../../complements/stylesheet.css">
 </head>
 <body>
-    <h1>Ajouter un livre</h1>
+    <h1>Ajouter un membre</h1>
     <form method="post">
         <div>
-            <label for="titre">Titre *</label>
-            <input type="text" name="titre" id="titre" required>
+            <label for="nom_prenom">Nom complet *</label>
+            <input type="text" name="nom_prenom" id="nom_prenom" required>
         </div>
         <div>
-            <label for="isbn">ISBN *</label>
-            <input type="text" name="isbn" id="isbn" required>
+            <label for="mail">Adresse mail *</label>
+            <input type="email" name="mail" id="mail" required>
         </div>
         <div>
-            <label for="date_publication">Date Publication *</label>
-            <input type="number" name="date_publication" id="date_publication" required>
+            <label for="adresse">Adresse *</label>
+            <input type="text" name="adresse" id="adresse" required>
         </div>
         <div>
-            <label for="nb_pages">Nombre de page *</label>
-            <input type="number" name="nb_pages" id="nb_pages" required>
+            <label for="telephone">Telephone *</label>
+            <input type="text" name="telephone" id="telephone" required>
         </div>
         <div>
-            <label for="resume">Resumé *</label>
-            <input type="text" name="resume" id="resume" required>
+            <label for="date_naissance">Date de naissance *</label>
+            <input type="date" name="date_naissance" id="date_naissance" required>
         </div>
         <div>
-            <label for="disponible">Disponible *</label>
-            <input type="checkbox" name="disponible" id="disponible">
+            <label for="actif">Est actif *</label>
+            <input type="checkbox" name="actif" id="actif">
         </div>
+        
 
-        <input class="boutton" type="submit" value="Ajouter un livre">
+        <input class="boutton" type="submit" value="Ajouter un membre">
     </form>
-    <a href="../index.php" class="boutton">Revenir à la liste des livres</a>
+    <a href="liste_membres.php" class="boutton">Revenir à la liste des membres</a>
 </body>
 </html>

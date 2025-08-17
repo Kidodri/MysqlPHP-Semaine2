@@ -1,40 +1,39 @@
 <?php 
-require_once('../../classes/Livre.php');
+require_once('../../classes/Membre.php');
 require_once('../../config/database.php');
 
-$livreModel = new Livre($pdo);
+$membreModel = new Membre($pdo);
 $errors = [];
 
-// Traitement id livre à modifier
+// Traitement id membre à modifier
 if($_GET){
     $id = $_GET['id'];
 }
 
-$livreAModifier = $livreModel->getOneById($id);
+$membreAModifier = $membreModel->getOneById($id);
 
 // Traitement form
 if($_POST){
     //Nouvel id 
-    $id_livre = $_POST['id_livre'] ?? '';
-    $titre = $_POST['titre'] ?? '';
-    $auteur_id = $_POST['auteur_id'] == null ? null : $_POST['auteur_id'] ;
-    $genre_id = $_POST['genre_id'] == null ? null : $_POST['genre_id'];
-    $isbn = $_POST['isbn'] ?? '';
-    $date_publication = $_POST['date_publication'] ?? '';
-    $nb_pages = $_POST['nb_pages'] ?? '';
-    $resume = $_POST['resume'] ?? '';
-    $disponible = $_POST['disponible'] ?? '';
+    $id_membre = $_POST['id_membre'] ?? '';
+    $nom_prenom = $_POST['nom_prenom'] ?? '';
+    $mail = $_POST['mail'] ?? '';
+    $telephone = $_POST['telephone'] ?? '';
+    $adresse = $_POST['adresse'] ?? '';
+    $date_naissance = $_POST['date_naissance'] ?? '';
+    $actif = $_POST['actif'] ?? '';
+
 
     // Validation des donnes
-    if($disponible == "on"){
-        $disponible = 1;
+    if($actif == "on"){
+        $actif = 1;
     }
     else {
-        $disponible = 0;
+        $actif = 0;
     }
     // Gestion des erreur
-    if($livreModel->update($id_livre,$titre, $isbn,$auteur_id,$genre_id, $date_publication,$nb_pages,$resume,$disponible,$id)){
-    header('Location: ../index.php?message=updated');
+    if($membreModel->update($id_membre,$nom_prenom, $mail,$telephone,$adresse,$date_naissance,$actif,$id)){
+    header('Location: liste_membres.php?message=updated');
     }
 
 }
@@ -49,52 +48,45 @@ if($_POST){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modification d'un livre</title>
+    <title>Modification d'un membre</title>
     <link rel="stylesheet" href="../../complements/stylesheet.css">
 </head>
 <body>
-    <h1>Modifier les informations du livre</h1>
+    <h1>Modifier les informations du membre</h1>
     <form method="post">
         <div>
-            <label for="id_livre">ID du livre *</label>
-            <input type="text" name="id_livre" id="id_livre" value="<?php echo $livreAModifier[0] ?>" required>
+            <label for="id_membre">ID du membre *</label>
+            <input type="number" name="id_membre" id="id_membre" value="<?php echo $membreAModifier[0] ?>" required>
         </div>
         <div>
-            <label for="titre">ID du livre *</label>
-            <input type="text" name="titre" id="titre" value="<?php echo $livreAModifier[1] ?>" required>
+            <label for="nom_prenom">Nom complet *</label>
+            <input type="text" name="nom_prenom" id="nom_prenom" value="<?php echo $membreAModifier[1] ?>" required>
         </div>
         <div>
-            <label for="isbn">ISBN *</label>
-            <input type="text" name="isbn" id="isbn" value="<?php echo $livreAModifier[2] ?>" required>
+            <label for="mail">Mail</label>
+            <input type="email" name="mail" id="mail" value="<?php echo $membreAModifier[2] ?>" required>
         </div>
         <div>
-            <label for="auteur_id">ID de l'auteur</label>
-            <input type="number" name="auteur_id" id="auteur_id" value="<?php echo $livreAModifier[3] ?>">
+            <label for="telephone">Telephone *</label>
+            <input type="number" name="telephone" id="telephone" value="<?php echo $membreAModifier[3] ?>" required>
         </div>
         <div>
-            <label for="genre_id">ID du genre</label>
-            <input type="number" name="genre_id" id="genre_id" value="<?php echo $livreAModifier[4] ?>">
+            <label for="adresse">Adresse *</label>
+            <input type="text" name="adresse" id="adresse" value="<?php echo $membreAModifier[4] ?>" required>
         </div>
         <div>
-            <label for="date_publication">Date Publication *</label>
-            <input type="number" name="date_publication" id="date_publication" value="<?php echo $livreAModifier[5] ?>" required>
+            <label for="date_naissance">Date de naissance *</label>
+            <input type="date" name="date_naissance" id="date_naissance" value="<?php echo $membreAModifier[5] ?>" required>
         </div>
         <div>
-            <label for="nb_pages">Nombre de page *</label>
-            <input type="number" name="nb_pages" id="nb_pages" value="<?php echo $livreAModifier[6] ?>" required>
+            <label for="actif">Actif *</label>
+            <input type="checkbox" name="actif" id="actif" <?php if($membreAModifier[7] == 1){echo "checked";} ?>>
         </div>
-        <div>
-            <label for="resume">Resumé</label>
-            <textarea id="resume" name="resume" rows="5" cols="33"><?php echo $livreAModifier[7] ?></textarea>
-        </div>
-        <div>
-            <label for="disponible">Disponible *</label>
-            <input type="checkbox" name="disponible" id="disponible" <?php if($livreAModifier[8] == 1){echo "checked";} ?>>
-        </div>
+        
 
-        <input class="boutton" type="submit" value="Modifier un livre">
+        <input class="boutton" type="submit" value="Modifier un membre">
     </form>
-    <a href="../index.php" class="boutton">Revenir à la liste des livres</a>
+    <a href="liste_membres.php" class="boutton">Revenir à la liste des membres</a>
 </body>
 </html>
     

@@ -68,7 +68,8 @@ label {
 }
 
 input[type="text"],
-input[type="number"] {
+input[type="number"],
+input[type="email"] {
     width: 100%;
     padding: 9px 12px;
     border: 1px solid #444c56;
@@ -79,8 +80,10 @@ input[type="number"] {
     transition: border 0.2s, background 0.2s;
 }
 
+
 input[type="text"]:focus,
-input[type="number"]:focus {
+input[type="number"]:focus,
+input[type="email"]:focus{
     border-color: #7fff7f;
     background: #1a1d22;
     outline: none;
@@ -128,7 +131,6 @@ p {
 }
 
 .boutton {
-    display: inline-block;
     background: linear-gradient(90deg, #7fff7f 60%, #4be04b 100%);
     color: #23272f;
     border: none;
@@ -150,3 +152,8 @@ p {
     box-shadow: 0 4px 16px rgba(79,255,127,0.15);
 }
 
+div .menu{
+    display: flex;
+    justify-content: space-evenly;
+    border: 2px dashed red; /* DEBUG: à retirer après test */
+}

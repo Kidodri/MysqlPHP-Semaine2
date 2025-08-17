@@ -45,7 +45,7 @@ class Membre
 
     //UPDATE - Modifier un membre
     public function update($id_membre,$nom_prenom,$mail,$telephone,$adresse,$date_naissance,$actif,$id){
-        $sql = "UPDATE `membres` SET `id`=?,`nom`=?,`description`=? WHERE id=?";
+        $sql = "UPDATE `membres` SET `id`=?,`nom_prenom`=?,`mail`=?, `telephone`=?, `adresse`=?, `date_naissance`=?, `actif`=? WHERE id=?";
 
         $stmt = $this->pdo->prepare($sql);
         return $stmt->execute([$id_membre,$nom_prenom,$mail,$telephone,$adresse,$date_naissance,$actif,$id]);

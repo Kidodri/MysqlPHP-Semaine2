@@ -1,29 +1,21 @@
 <?php 
-require_once('../../classes/Livre.php');
+require_once('../../classes/Auteur.php');
 require_once('../../config/database.php');
 
-$livreModel = new Livre($pdo);
+$auteurModel = new Auteur($pdo);
 $errors = [];
 
 // traitement formulaire
 if($_POST){
     $titre = $_POST['titre'] ?? '';
-    $isbn = $_POST['isbn'] ?? '';
-    $date_publication = $_POST['date_publication'] ?? '';
-    $nb_pages = $_POST['nb_pages'] ?? '';
-    $resume = $_POST['synthese'] ?? '';
-    $disponible = $_POST['disponible'] ?? '';
-
-    // Validation des donnes
-    if($disponible == "on"){
-        $disponible = 1;
-    }
-    else {
-        $disponible = 0;
-    }
+    $nom_prenom = $_POST['nom_prenom'] ?? '';
+    $nationalite = $_POST['nationalite'] ?? '';
+    $date_naissance = $_POST['date_naissance'] ?? '';
+    $biographie = $_POST['biographie'] ?? '';
+    
 
     // Gestion des erreurs
-    $livreModel->create($titre, $isbn, $date_publication,$nb_pages,$resume,$disponible);
+    $auteurModel->create($nom_prenom, $nationalite,$date_naissance,$biographie);
     header('Location: ../index.php?message=created');
 }
 ?>
@@ -33,39 +25,30 @@ if($_POST){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creation d'un livre</title>
+    <title>Creation d'un auteur</title>
     <link rel="stylesheet" href="../../complements/stylesheet.css">
 </head>
 <body>
-    <h1>Ajouter un livre</h1>
+    <h1>Ajouter un auteur</h1>
     <form method="post">
         <div>
-            <label for="titre">Titre *</label>
-            <input type="text" name="titre" id="titre" required>
+            <label for="nom_prenom">Nom complet *</label>
+            <input type="text" name="nom_prenom" id="nom_prenom" required>
         </div>
         <div>
-            <label for="isbn">ISBN *</label>
-            <input type="text" name="isbn" id="isbn" required>
+            <label for="nationalite">Nationalité *</label>
+            <input type="text" name="nationalite" id="nationalite" required>
         </div>
         <div>
-            <label for="date_publication">Date Publication *</label>
-            <input type="number" name="date_publication" id="date_publication" required>
+            <label for="date_naissance">Date de naissance *</label>
+            <input type="date" name="date_naissance" id="date_naissance" required>
         </div>
-        <div>
-            <label for="nb_pages">Nombre de page *</label>
-            <input type="number" name="nb_pages" id="nb_pages" required>
-        </div>
-        <div>
-            <label for="resume">Resumé *</label>
-            <input type="text" name="resume" id="resume" required>
-        </div>
-        <div>
-            <label for="disponible">Disponible *</label>
-            <input type="checkbox" name="disponible" id="disponible">
+            <label for="biographie">Biographie</label>
+            <textarea id="biographie" name="biographie"></textarea>
         </div>
 
-        <input class="boutton" type="submit" value="Ajouter un livre">
+        <input class="boutton" type="submit" value="Ajouter un auteur">
     </form>
-    <a href="../index.php" class="boutton">Revenir à la liste des livres</a>
+    <a href="../index.php" class="boutton">Revenir à la liste des auteurs</a>
 </body>
 </html>
